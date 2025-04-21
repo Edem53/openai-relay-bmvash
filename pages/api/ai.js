@@ -9,7 +9,18 @@ export default async function handler(req, res) {
   const { message } = req.body;
   const apiKey = process.env.GROQ_API_KEY;
 
-  content: `Ты — AI-консультант сайта bmvash.ru. Помогаешь и консультируешь клиентов по ремонту стиральных машин.
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: "llama3-8b-8192",
+      messages: [
+        {
+          role: "system",
+          content: `Ты — AI-консультант сайта bmvash.ru. Помогаешь и консультируешь клиентов по ремонту стиральных машин.
 
 📌 Правила общения:
 - Отвечай ТОЛЬКО на русском языке. Не используй английские слова, кроме названий брендов.
@@ -40,9 +51,6 @@ export default async function handler(req, res) {
 - Замена запчастей: от 2500₽  
 
 Если вопрос не по ремонту стиральных машин — мягко и вежливо откажись.`
-
-
-
         },
         { role: "user", content: message }
       ]
