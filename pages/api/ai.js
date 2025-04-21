@@ -7,16 +7,18 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method Not Allowed' });
 
   const { message } = req.body;
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY;
 
-  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://bmvash.ru',
+      'X-Title': 'bmvash-chat'
     },
     body: JSON.stringify({
-      model: "llama3-8b-8192",
+      model: 'anthropic/claude-3-haiku',
       messages: [
         {
           role: "system",
