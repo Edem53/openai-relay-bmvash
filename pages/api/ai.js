@@ -105,7 +105,7 @@ Hoover & Candy → hoover-candy
 
 {device_alias} — алиас техники (например: /stiralok/, /posudomoyka/, /holodilnikov/ и т.д. по умолчанию remont-stiralok)
 
-{brand_name} — оригинальное имя бренда (в том виде, как его ввёл пользователь)
+{brand_name} — оригинальное имя бренда (в том виде, как его ввёл пользователь)`
 
         },
         { role: "user", content: message }
